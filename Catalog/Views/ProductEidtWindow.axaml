@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Catalog.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Catalog.Views.ProductEidtWindow"
+       x:DataType="viewModels:edit"
+        Title="Edit">
+    <Window.DataContext>
+        <viewModels:edit></viewModels:edit>
+    </Window.DataContext>    
+    <DataGrid.Columns>
+        <DataGridTextColumn Header="Id" x:DataType="Models" Binding="{Binding ProductId}"  />
+        <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+        <DataGridTextColumn Header="год выпуска" Binding="{Binding Year}"/>
+        <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
+    </DataGrid.Columns>
+    </DataGrid>
+</Window>
