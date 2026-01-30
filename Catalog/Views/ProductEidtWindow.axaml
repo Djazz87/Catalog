@@ -9,12 +9,15 @@
         Title="Edit">
     <Window.DataContext>
         <viewModels:edit></viewModels:edit>
-    </Window.DataContext>    
-    <DataGrid.Columns>
-        <DataGridTextColumn Header="Id" x:DataType="Models" Binding="{Binding ProductId}"  />
-        <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
-        <DataGridTextColumn Header="год выпуска" Binding="{Binding Year}"/>
-        <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-    </DataGrid.Columns>
-    </DataGrid>
+    </Window.DataContext> 
+    <StackPanel>
+    <StackPanel DataContext="{Binding SelectedItem}">
+        <TextBox Watermark="Id"  Text="{Binding ProductId}"  />
+        <TextBox Watermark="Название" Text="{Binding Title}"/>
+        <TextBox Watermark="год выпуска" Text="{Binding Year}"/>
+        <TextBox Watermark="Цена" Text="{Binding Price}"/>
+    </StackPanel>
+        <Button Content="Сохранить"/>
+        <Button Content="Удалить"/>
+    </StackPanel>
 </Window>

@@ -77,3 +77,4 @@
 /home/user/RiderProjects/Catalog/Catalog/obj/Debug/net8.0/Catalog.pdb
 /home/user/RiderProjects/Catalog/Catalog/obj/Debug/net8.0/Catalog.genruntimeconfig.cache
 /home/user/RiderProjects/Catalog/Catalog/obj/Debug/net8.0/ref/Catalog.dll
+/home/user/RiderProjects/Catalog/Catalog/obj/Debug/net8.0/Catalog.sourcelink.json
