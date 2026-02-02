@@ -27,7 +27,7 @@
         <Button VerticalAlignment="Top" 
                 Grid.Row="0" Grid.Column="3"
                 Content="Добавить"  
-                Command="{Binding }"/>
+                Command="{Binding Delete}"/>
         <Button VerticalAlignment="Top" 
                 Grid.Row="0" Grid.Column="4"
                 Content="Изменить"  

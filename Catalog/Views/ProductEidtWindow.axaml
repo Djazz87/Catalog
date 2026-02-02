@@ -18,6 +18,6 @@
         <TextBox Watermark="Цена" Text="{Binding Price}"/>
     </StackPanel>
         <Button Content="Сохранить"/>
-        <Button Content="Удалить"/>
+        <Button Content="Удалить" />
     </StackPanel>
 </Window>

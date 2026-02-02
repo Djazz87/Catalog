@@ -5,7 +5,7 @@ using MySqlConnector;
 
 namespace Catalog.Services;
 
-public static class DatabaseService
+public class DatabaseService
 {
     private static MySqlConnection _connection;
 
@@ -79,5 +79,74 @@ public static class DatabaseService
         {
         }
     }
+
+    public bool DeleteProduct(int productId)
+    {
+        string sql = "DELETE FROM product WHERE id = @ProductId;"; 
+
+        if (OpenConnection())
+        {
+            using (var command = new MySqlCommand(sql, _connection))
+            {
+                
+                command.Parameters.AddWithValue("@ProductId", productId);
+
+                try
+                {
+                    int rowsAffected = command.ExecuteNonQuery(); 
+                    return rowsAffected > 0; 
+                }
+                catch (MySqlException ex)
+                {
+                   
+                    return false; 
+                }
+            }
+            CloseConnection();
+        }
+        return false;
+    }
+    
+    public static bool Update(Product ToProduct)
+    {
+        if (OpenConnection())
+        {
+            string sql = "update `Product` set title=@title,year=@year,price=@price,manufacturer_id=@m_id,where Id=@id";
+            using var mc = new MySqlCommand(sql, _connection);
+            mc.Parameters.AddWithValue("@title", ToProduct.Title);
+            mc.Parameters.AddWithValue("@year", ToProduct.Year);
+            mc.Parameters.AddWithValue("@price", ToProduct.Price);
+            mc.Parameters.AddWithValue("@m_id", ToProduct.ManufacturerId);
+            mc.Parameters.AddWithValue("@id", ToProduct.ProductId);
+            int row = mc.ExecuteNonQuery();
+            CloseConnection();
+            return true;
+        }
+        return false;
+    }
+
+    public static List<Manufacturer> GetManufacturers()
+    {
+        string sql = "select b.id,b.title from `manufacturer` b";
+        List <Manufacturer> manufacturers = new List<Manufacturer>();
+        if (OpenConnection())
+        {
+            using (var command = new MySqlCommand(sql, _connection))
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int ManufacturerId = reader.GetInt32("id");
+                    string manufacturerName = reader.GetString("title");
+                    Manufacturer manufacturer = new Manufacturer();
+                    {Title = manufacturerName, ManufacturerId =  ManufacturerId};
+                    manufacturers.Add(manufacturer);
+                }
+            }
+        }
+    }
+
+   
 }
+
 

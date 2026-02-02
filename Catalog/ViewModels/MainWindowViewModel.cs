@@ -12,11 +12,13 @@ public partial class MainWindowViewModel : ViewModelBase
    private ObservableCollection<Product> _product;
 
    private Product _selectedItem;
+   
+   private readonly DatabaseService DBService = new DatabaseService();
 
    public MainWindowViewModel()
    {
       Product =  new ObservableCollection<Product>(DatabaseService.GetProducts());
-      
+      DBService = new DatabaseService();
       
    }
    public Product SelectedItem
@@ -35,5 +37,18 @@ public partial class MainWindowViewModel : ViewModelBase
       var window = new ProductEidtWindow(SelectedItem);
       window.Show();
 
+   }
+
+   public void Delete()
+   {
+      if (SelectedItem != null)
+         return;
+        
+      bool isDeletedFromDb = DBService.DeleteProduct(SelectedItem.ProductId);
+      if (isDeletedFromDb)
+      {
+         Product.Remove(SelectedItem);
+         SelectedItem = null;
+      }
    }
 }
