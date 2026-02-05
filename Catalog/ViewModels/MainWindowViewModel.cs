@@ -38,17 +38,4 @@ public partial class MainWindowViewModel : ViewModelBase
       window.Show();
 
    }
-
-   public void Delete()
-   {
-      if (SelectedItem != null)
-         return;
-        
-      bool isDeletedFromDb = DBService.DeleteProduct(SelectedItem.ProductId);
-      if (isDeletedFromDb)
-      {
-         Product.Remove(SelectedItem);
-         SelectedItem = null;
-      }
-   }
 }
