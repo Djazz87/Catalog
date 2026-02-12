@@ -116,7 +116,6 @@ public class DatabaseService
             mc.Parameters.AddWithValue("@title", ToProduct.Title);
             mc.Parameters.AddWithValue("@year", ToProduct.Year);
             mc.Parameters.AddWithValue("@price", ToProduct.Price);
-            mc.Parameters.AddWithValue("@m_id", ToProduct.ManufacturerId);
             mc.Parameters.AddWithValue("@id", ToProduct.ProductId);
             int row = mc.ExecuteNonQuery();
             CloseConnection();
