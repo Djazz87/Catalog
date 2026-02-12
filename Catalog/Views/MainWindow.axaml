@@ -27,12 +27,15 @@
         <Button VerticalAlignment="Top" 
                 Grid.Row="0" Grid.Column="3"
                 Content="Добавить"  
-                Command="{Binding Delete}"/>
+                Command="{Binding }"/>
         <Button VerticalAlignment="Top" 
                 Grid.Row="0" Grid.Column="4"
                 Content="Изменить"  
                 Command="{Binding Rename }"/>
-       
+        <Button  VerticalAlignment="Top"
+                 Grid.Row="0" Grid.Column="5"
+            Content="Удалить" 
+            Command="{Binding DeleteCommand}" />
             
     </Grid>
  

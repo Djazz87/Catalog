@@ -3,6 +3,7 @@ using Catalog.Models;
 using Catalog.Services;
 using Catalog.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Catalog.ViewModels;
 
@@ -13,12 +14,13 @@ public partial class MainWindowViewModel : ViewModelBase
 
    private Product _selectedItem;
    
-   private readonly DatabaseService DBService = new DatabaseService();
+   private  DatabaseService DBService = new DatabaseService();
 
    public MainWindowViewModel()
    {
+      
       Product =  new ObservableCollection<Product>(DatabaseService.GetProducts());
-      DBService = new DatabaseService();
+     
       
    }
    public Product SelectedItem
@@ -37,5 +39,13 @@ public partial class MainWindowViewModel : ViewModelBase
       var window = new ProductEidtWindow(SelectedItem);
       window.Show();
 
+   }
+[RelayCommand]
+   public void Delete()
+   {
+      if (SelectedItem == null)
+         return;
+      if (DatabaseService.Delete(SelectedItem.ProductId))
+         Product.Remove(SelectedItem);
    }
 }

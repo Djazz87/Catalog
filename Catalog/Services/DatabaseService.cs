@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Catalog.Models;
+using CommunityToolkit.Mvvm.Input;
 using MySqlConnector;
 
 namespace Catalog.Services;
@@ -27,11 +28,12 @@ public class DatabaseService
             using (var reader = command.ExecuteReader())
                 while (reader.Read())
                 {
-                    int ManufacturerId = reader.GetInt32("id");
+                    int ManufacturerId = reader.GetInt32("manufacturer_id");
                     Manufacturer manufacturer;
                     if (!manufacturers.ContainsKey(ManufacturerId))
                     {
                         manufacturer = new Manufacturer();
+                        manufacturer.ManufacturerId = ManufacturerId;
                         manufacturer.Title = reader.GetString("mtitle");
                         manufacturers[ManufacturerId] = manufacturer;
                     }
@@ -50,6 +52,7 @@ public class DatabaseService
     
                     }; products.Add(product);
                 }
+            CloseConnection();
         }
 
         return products;
@@ -80,72 +83,39 @@ public class DatabaseService
         }
     }
 
-    public bool DeleteProduct(int productId)
+    public static bool Delete(int productId)
     {
-        string sql = "DELETE FROM product WHERE id = @ProductId;"; 
-
         if (OpenConnection())
         {
-            using (var command = new MySqlCommand(sql, _connection))
-            {
-                
-                command.Parameters.AddWithValue("@ProductId", productId);
-
-                try
-                {
-                    int rowsAffected = command.ExecuteNonQuery(); 
-                    return rowsAffected > 0; 
-                }
-                catch (MySqlException ex)
-                {
-                   
-                    return false; 
-                }
-            }
+            string sql = "delete from `product` where `id` = @id";
+            using var mc =  new MySqlCommand(sql, _connection);
+            mc.Parameters.AddWithValue("@id", productId);
+            mc.ExecuteNonQuery();
             CloseConnection();
+            return true;
         }
         return false;
     }
     
+  
     public static bool Update(Product ToProduct)
     {
         if (OpenConnection())
         {
-            string sql = "update `Product` set title=@title,year=@year,price=@price,manufacturer_id=@m_id,where Id=@id";
+            string sql = "update `product` set title=@title,year=@year,price=@price,manufacturer_id=@m_id where Id=@id";
             using var mc = new MySqlCommand(sql, _connection);
             mc.Parameters.AddWithValue("@title", ToProduct.Title);
             mc.Parameters.AddWithValue("@year", ToProduct.Year);
             mc.Parameters.AddWithValue("@price", ToProduct.Price);
             mc.Parameters.AddWithValue("@id", ToProduct.ProductId);
+            mc.Parameters.AddWithValue("@m_id", ToProduct.Manufacturer.ManufacturerId);
             int row = mc.ExecuteNonQuery();
             CloseConnection();
             return true;
         }
         return false;
     }
-
-    public static List<Manufacturer> GetManufacturers()
-    {
-        string sql = "select b.id,b.title from `manufacturer` b";
-        List <Manufacturer> manufacturers = new List<Manufacturer>();
-        if (OpenConnection())
-        {
-            using (var command = new MySqlCommand(sql, _connection))
-            using (var reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    int ManufacturerId = reader.GetInt32("id");
-                    string manufacturerName = reader.GetString("title");
-                    Manufacturer manufacturer = new Manufacturer();
-                    {Title = manufacturerName, ManufacturerId =  ManufacturerId};
-                    manufacturers.Add(manufacturer);
-                }
-            }
-        }
-    }
-
-   
+    
 }
 
 

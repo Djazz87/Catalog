@@ -17,7 +17,6 @@
         <TextBox Watermark="год выпуска" Text="{Binding Year}"/>
         <TextBox Watermark="Цена" Text="{Binding Price}"/>
     </StackPanel>
-        <Button Content="Сохранить"/>
-        <Button Content="Удалить" />
+        <Button Content="Сохранить" Command="{Binding Save}"/>
     </StackPanel>
 </Window>

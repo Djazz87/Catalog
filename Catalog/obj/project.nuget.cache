@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "44sBUgPnVR0=",
+  "dgSpecHash": "WPK2BM74oSA=",
   "success": true,
   "projectFilePath": "/home/user/RiderProjects/Catalog/Catalog/Catalog.csproj",
   "expectedPackageFiles": [
@@ -36,7 +36,10 @@
     "/home/user/.nuget/packages/skiasharp.nativeassets.webassembly/2.88.9/skiasharp.nativeassets.webassembly.2.88.9.nupkg.sha512",
     "/home/user/.nuget/packages/skiasharp.nativeassets.win32/2.88.9/skiasharp.nativeassets.win32.2.88.9.nupkg.sha512",
     "/home/user/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512",
-    "/home/user/.nuget/packages/tmds.dbus.protocol/0.21.2/tmds.dbus.protocol.0.21.2.nupkg.sha512"
+    "/home/user/.nuget/packages/tmds.dbus.protocol/0.21.2/tmds.dbus.protocol.0.21.2.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.netcore.app.ref/8.0.23/microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.23/microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.23/microsoft.netcore.app.host.linux-x64.8.0.23.nupkg.sha512"
   ],
   "logs": []
 }
